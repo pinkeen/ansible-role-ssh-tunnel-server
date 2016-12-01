@@ -1,0 +1,10 @@
+- name: Create ssh tunnel user
+  user:
+    name: "{{ ssh_tunnel_server_user }}"
+    state: present
+
+- name: Authorize tunnel key
+  authorized_key:
+    user: "{{ ssh_tunnel_server_user }}"
+    key: "{{ item }}"
+  with_items: "{{ ssh_tunnel_server_authorized_keys }}"
